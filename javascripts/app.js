@@ -5,6 +5,32 @@ var rover = {
   travelLog:[[0,0]]
 }
 
+// var board = [ 
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','R',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+// ]
+
+// console.log(board.join('\n') + '\n\n');
+
 //--------ROVER DIRECTIONS N-NORTH / S-SOUTH / E-EAST / W- WEST
 // ACCESO A PROPIEDAD -> rover.direction
 // CAMBIO DE VALOR DE LA PROPIEDAD -> rover.direction = "W";
@@ -76,6 +102,22 @@ function moveForward(rover){
   rover.travelLog.push([rover.x,rover.y]);
 }
 
+function moveBackwards(rover){
+  
+  if (rover.direction==="W") {
+    rover.x +=1;
+  } else if (rover.direction==="N") {
+    rover.y +=1;
+  } else if (rover.direction==="S") {
+    rover.y -=1;
+  } else if (rover.direction==="E") {
+    rover.x -=1;
+  } 
+  rover.x= valBetween(rover.x,-10,10); 
+  rover.y= valBetween(rover.y,-10,10);
+  rover.travelLog.push([rover.x,rover.y]);
+}
+
 
 
 function commands(listCommands) {
@@ -95,16 +137,41 @@ function commands(listCommands) {
         turnLeft(rover);
         break;
 
+        case "b":
+        moveBackwards(rover);
+
         default:
-        console.log("Please enter f-r-l sequence.")
+        console.log("Please enter (f)Forward (b) Backwards (r) turn Right (l) turn Left");
         break;
       }
     }
     console.log("New direction is "+rover.direction);
     console.log("Current position is "+rover.x+" "+rover.y);
+    //locate(rover.x,rover.y);
+
+    // locate rover
+  //   function locate(h,k) {
+  //   hI=h+10;
+  //   kI=k+10;
+
+  //   for (i=0; i>board.length; i++) {
+  //     for (j=0; j>board.length; j++) {
+  //       if (board[i][j]==="R") {
+  //         board[hI][kI]=board[i][j];
+  //         board[i][j]=' ';
+  //       }
+  //     }
+  //   }
+  //   console.log(board.join('\n'));
+  // }
+
+
+
     console.log("Rover Travel Log:");
     
     for(j=0;j<rover.travelLog.length;j++) {
       console.log("Move number "+j+" ["+rover.travelLog[j]+"]");
     }
 }
+
+
