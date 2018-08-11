@@ -55,6 +55,10 @@ function turnRight(rover){
   }
   
 }
+//LIMITAR A 10X10 
+function valBetween(v, min, max) {
+  return (Math.min(max, Math.max(min, v)));
+}
 
 function moveForward(rover){
   
@@ -66,15 +70,17 @@ function moveForward(rover){
     rover.y +=1;
   } else if (rover.direction==="E") {
     rover.x +=1;
-  }
-  
+  } 
+  rover.x= valBetween(rover.x,-10,10); 
+  rover.y= valBetween(rover.y,-10,10);
   rover.travelLog.push([rover.x,rover.y]);
 }
 
 
+
 function commands(listCommands) {
   var commandsArr=listCommands.split("");
-  
+
     for (var i=0; i<commandsArr.length ; i++) {
       switch (commandsArr[i]) {
        case "f":
@@ -97,9 +103,8 @@ function commands(listCommands) {
     console.log("New direction is "+rover.direction);
     console.log("Current position is "+rover.x+" "+rover.y);
     console.log("Rover Travel Log:");
+    
     for(j=0;j<rover.travelLog.length;j++) {
       console.log("Move number "+j+" ["+rover.travelLog[j]+"]");
     }
-  
-    
 }
