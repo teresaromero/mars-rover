@@ -1,3 +1,4 @@
+//------ITERATION 1 - THE ROVER OBJECT
 var rover = {
   direction:"N",
   x:0,
@@ -5,38 +6,15 @@ var rover = {
   travelLog:[[0,0]]
 }
 
-// var board = [ 
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','R',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-//   [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-// ]
 
-// console.log(board.join('\n') + '\n\n');
+//------------------STARTING INSTRUCTIONS--------------------
+console.log("Welcome to the Rover Mars Kata Game by T.Romero");
+console.log("Please enter (f)Forward (b) Backwards (r) turn Right (l) turn Left");
+console.log("Type the list of commands inside the function commands() and press ENTER");
 
-//--------ROVER DIRECTIONS N-NORTH / S-SOUTH / E-EAST / W- WEST
-// ACCESO A PROPIEDAD -> rover.direction
-// CAMBIO DE VALOR DE LA PROPIEDAD -> rover.direction = "W";
-// ======================
 
-// ======================
+//------------------ITERATION 2 - TURNING THE ROVER-----------------------
+
 function turnLeft(rover){
   
   switch (rover.direction) {
@@ -81,10 +59,8 @@ function turnRight(rover){
   }
   
 }
-//LIMITAR A 10X10 
-function valBetween(v, min, max) {
-  return (Math.min(max, Math.max(min, v)));
-}
+
+//------------------ITERATION 3 - MOVING THE ROVER-----------------------
 
 function moveForward(rover){
   
@@ -101,6 +77,7 @@ function moveForward(rover){
   rover.y= valBetween(rover.y,-10,10);
   rover.travelLog.push([rover.x,rover.y]);
 }
+//------------------BONUS - MOVING BACKWARDS-----------------------
 
 function moveBackwards(rover){
   
@@ -118,8 +95,13 @@ function moveBackwards(rover){
   rover.travelLog.push([rover.x,rover.y]);
 }
 
+//----------------BONUS: ENFORCE BOUNDRIES ---------------------------
+function valBetween(v, min, max) {
+  return (Math.min(max, Math.max(min, v)));
+}
 
 
+//------------------ITERATION 4 - COMMANDS-----------------------
 function commands(listCommands) {
   var commandsArr=listCommands.split("");
 
@@ -139,39 +121,25 @@ function commands(listCommands) {
 
         case "b":
         moveBackwards(rover);
-
+        //--------------------BONUS: VALIDATE INPUTS
         default:
         console.log("Please enter (f)Forward (b) Backwards (r) turn Right (l) turn Left");
         break;
       }
     }
+
+    //-----------OUTPUT OF THE GAME---------------------------
     console.log("New direction is "+rover.direction);
     console.log("Current position is "+rover.x+" "+rover.y);
-    //locate(rover.x,rover.y);
 
-    // locate rover
-  //   function locate(h,k) {
-  //   hI=h+10;
-  //   kI=k+10;
-
-  //   for (i=0; i>board.length; i++) {
-  //     for (j=0; j>board.length; j++) {
-  //       if (board[i][j]==="R") {
-  //         board[hI][kI]=board[i][j];
-  //         board[i][j]=' ';
-  //       }
-  //     }
-  //   }
-  //   console.log(board.join('\n'));
-  // }
-
-
-
+    //------------------ITERATION 5 - TRACKING-----------------------
     console.log("Rover Travel Log:");
     
     for(j=0;j<rover.travelLog.length;j++) {
-      console.log("Move number "+j+" ["+rover.travelLog[j]+"]");
+      console.log("Movement number "+j+" ["+rover.travelLog[j]+"]");
     }
 }
+
+//---------END GAME
 
 
